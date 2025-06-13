@@ -32,10 +32,10 @@ export default function Header() {
               <Link className="hover:text-yellow-400 glitch" href="/">Home</Link>
             </li>
             <li>
-              <Link className="hover:text-yellow-400 glitch" href="/login">Login</Link>
+              <Link className="hover:text-yellow-400 glitch" href="/auth/login">Login</Link>
             </li>
             <li>
-              <Link className="hover:text-yellow-400 glitch" href="/register">Register</Link>
+              <Link className="hover:text-yellow-400 glitch" href="/auth/register">Register</Link>
             </li>
           </ul>
         </nav>
