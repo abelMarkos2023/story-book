@@ -35,11 +35,12 @@ import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, BookOpenText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
+import Chapter from '@/types/Chapter';
 
 export default function ChapterPage() {
   const { id } = useParams();
   const router = useRouter();
-  const [chapter, setChapter] = useState<any>(null);
+  const [chapter, setChapter] = useState<Chapter|null>(null);
 
   useEffect(() => {
     const fetchChapter = async () => {
@@ -58,7 +59,7 @@ export default function ChapterPage() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

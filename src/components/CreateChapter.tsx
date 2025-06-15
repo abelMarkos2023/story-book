@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import ChapterEditor from '@/components/Editor';
+import Book from '@/types/Book';
 
 export default function AddChapterPage() {
   const [title, setTitle] = useState('');
@@ -46,7 +47,7 @@ export default function AddChapterPage() {
         className="w-full p-2 rounded bg-gray-800 mb-4"
       >
         <option value="">Select Book</option>
-        {books.length > 0 && books.map((book: any) => (
+        {books.length > 0 && books.map((book: Book) => (
           <option key={book._id} value={book._id}>{book.title}</option>
         ))}
       </select>

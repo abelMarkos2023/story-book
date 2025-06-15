@@ -1,17 +1,22 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export const config = {
-  matcher: [
-    "/auth/login",
-    "/auth/register",
-    "/dashboard/:path*",
-  ],
   images: {
-    domains: ['lh3.googleusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**', // Allow any HTTPS URL
+      },
+      {
+        protocol: 'http',
+        hostname: '**', // Optional: allow HTTP (less secure)
+      },
+    ],
   },
 };
 

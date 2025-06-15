@@ -40,8 +40,10 @@ export default function DashboardPage() {
       <Navbar />
 
       <main className="max-w-7xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-8 mt-8">📊 Dashboard Overview</h1>
-
+<div className="flex items center justify-between">
+          <h1 className="text-3xl font-bold mb-8 mt-8">📊 Dashboard Overview</h1>
+          <span className="text-xl">{session?.user?.name}</span>
+</div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <Card className={cardClasses}>
             <CardHeader className="flex items-center gap-3">

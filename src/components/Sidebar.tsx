@@ -12,6 +12,8 @@ export default function Sidebar({ open, onClose }: { open: boolean, onClose: () 
   const pathname = usePathname();
   const { data: session } = useSession();
 
+  console.log(session?.user)
+
   const links = [
     { href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { href: '/dashboard/books', label: 'Books', icon: <Book size={20} /> },

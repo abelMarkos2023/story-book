@@ -1,11 +1,13 @@
 import { connectToDatabase } from "@/app/lib/mongodb";
 import Book from "@/models/Book";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   await connectToDatabase();
+
+  const { id } = await params;
   try {
-    const book = await Book.findById(params.id);
+    const book = await Book.findById(id);
     return NextResponse.json(book);
   } catch (error) {
     console.log(error)
