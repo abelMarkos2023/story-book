@@ -1,5 +1,7 @@
 'use client';
 
+import Link from "next/link";
+
 export default function HeroSection() {
   return (
     <section className="relative bg-gradient-to-br from-black via-gray-900 to-black text-white text-center py-24 px-6 overflow-hidden">
@@ -8,17 +10,17 @@ export default function HeroSection() {
         双子
       </h2>
 
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">
-        Welcome to <span className="text-yellow-400">The Obnoxious Twins</span> ⚡
+      <h1 className="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">
+        Hello and Welcome to the world of ⚡ <span className="text-yellow-400"> Obnoxious Twins</span> ⚡
       </h1>
 
       <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
-        Manga-inspired stories crafted for the wild at heart. Read, comment, and join the adventure.
+       For the reckless dreamers and fierce souls. Read epic manga-inspired adventures and shape the journey with your voice
       </p>
 
-      <button className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-full text-xl transition duration-300 shadow-lg animate-bounce">
+      <Link href='/books' className="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-full text-xl transition duration-300 shadow-lg animate-bounce">
         📖 Start Reading
-      </button>
+      </Link>
     </section>
   );
 }

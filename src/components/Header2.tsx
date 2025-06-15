@@ -24,7 +24,7 @@ export default function Header() {
 
   },[session])
   return (
-    <header className="bg-black text-white shadow-lg fixed top-0 left-16 md:left-64 right-0">
+    <header className="bg-black text-white shadow-lg fixed top-0  right-0">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
         <h1 className="text-md md:text-xl xl:text-3xl font-extrabold tracking-wide relative inline-block animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-purple-500 drop-shadow-lg">
           <span className="inline-block animate-float">⚔️</span>
