@@ -1,3 +1,5 @@
+
+
 // import { NextAuthOptions, getServerSession } from "next-auth";
 // import GoogleProvider from "next-auth/providers/google";
 // import CredentialsProvider from "next-auth/providers/credentials";
@@ -18,6 +20,13 @@
 //     GoogleProvider({
 //       clientId: process.env.GOOGLE_CLIENT_ID!,
 //       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+//       authorization: {
+//         params: {
+//           prompt: "consent",
+//           access_type: "offline",
+//           response_type: "code",
+//         },
+//       },
 //     }),
 //     CredentialsProvider({
 //       name: "Credentials",
@@ -45,7 +54,7 @@
 //           id: user._id.toString(),
 //           email: user.email,
 //           name: user.name,
-//           role: user.role, // pull real role from DB
+//           role: user.role,
 //         };
 //       },
 //     }),
@@ -61,7 +70,6 @@
 //     async signIn({ user, account }) {
 //       await connectToDatabase();
 
-//       // If it's Google sign in, ensure user exists in DB
 //       if (account?.provider === "google") {
 //         let existingUser = await User.findOne({ email: user.email });
 
@@ -69,25 +77,31 @@
 //           existingUser = await User.create({
 //             name: user.name,
 //             email: user.email,
-//             role: "user", // default role
+//             role: "user",
 //           });
 //         }
+
+//         user.id = existingUser._id.toString();
+//         user.role = existingUser.role || "user";
+//         user.name = existingUser.name || user.name;
 //       }
 
-//       console.log('user', user)
+//       console.log("signIn callback user:", user);
 //       return true;
 //     },
 //     async jwt({ token, user }) {
 //       if (user) {
 //         token.id = user.id;
 //         token.role = user.role;
+//         token.name = user.name;
 //       }
 //       return token;
 //     },
 //     async session({ session, token }) {
-//       if (session) {
+//       if (session.user && token.id && token.role && token.name) {
 //         session.user.id = token.id;
 //         session.user.role = token.role;
+//         session.user.name = token.name;
 //       }
 //       return session;
 //     },
@@ -103,6 +117,7 @@ import { connectToDatabase } from "./mongodb";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
 
+// Password helpers
 export async function hashPassword(password: string) {
   return bcrypt.hash(password, 12);
 }
@@ -124,6 +139,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
     }),
+
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -136,7 +152,6 @@ export const authOptions: NextAuthOptions = {
         }
 
         await connectToDatabase();
-
         const user = await User.findOne({ email: credentials.email });
         if (!user) {
           throw new Error("No user found");
@@ -146,6 +161,7 @@ export const authOptions: NextAuthOptions = {
         if (!isValid) {
           throw new Error("Invalid password");
         }
+
         return {
           id: user._id.toString(),
           email: user.email,
@@ -155,13 +171,17 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
   secret: process.env.NEXTAUTH_SECRET,
+
   pages: {
     signIn: "/auth/login",
   },
+
   session: {
     strategy: "jwt",
   },
+
   callbacks: {
     async signIn({ user, account }) {
       await connectToDatabase();
@@ -182,10 +202,11 @@ export const authOptions: NextAuthOptions = {
         user.name = existingUser.name || user.name;
       }
 
-      console.log("signIn callback user:", user);
       return true;
     },
+
     async jwt({ token, user }) {
+      // Runs at sign in
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -193,13 +214,26 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+
     async session({ session, token }) {
-      if (session.user && token.id &&token.role && token.name) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.name = token.name;
+      if (session.user) {
+        session.user.id = token.id ?? '';
+        session.user.role = token.role ?? 'user';
+        session.user.name = token.name ?? '';
       }
       return session;
+    },
+  },
+
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
     },
   },
 };
