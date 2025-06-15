@@ -3,15 +3,15 @@ import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import Chapter from '@/models/Chapter';
 import Book from '@/models/Book';
-import { auth } from '@/app/lib/auth'; // From your NextAuth.js setup
+// import { auth } from '@/app/lib/auth'; // From your NextAuth.js setup
 
 console.log(Book)
 export async function GET() {
   // Authenticate user (optional, based on your requirements)
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  // const session = await auth();
+  // if (!session) {
+  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  // }
 
   await connectToDatabase();
   try {
