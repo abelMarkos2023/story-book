@@ -61,7 +61,7 @@ export default function CreateBook() {
 
       // redirect to new book page
     
-         router.push(`/dashboard/books/${data._id}`);
+         router.push(`/books/${data._id}`);
 
       
     } catch (error) {
