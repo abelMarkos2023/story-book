@@ -11,7 +11,9 @@ const config =  {
   ],
   theme: {
     extend: {
-      
+      animation: {
+        spin: 'spin 1s linear infinite',
+      },
       colors: {
         primary: '#2563eb',
         secondary: '#10b981',

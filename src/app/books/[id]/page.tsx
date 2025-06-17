@@ -83,7 +83,7 @@ export default function BookPage() {
             />
           )}
 
-          <h1 className="text-5xl font-extrabold text-yellow-400 mb-6 tracking-tight drop-shadow">
+          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-yellow-400 mb-6 tracking-tight drop-shadow">
             {book.title}
           </h1>
 

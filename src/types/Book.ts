@@ -4,11 +4,11 @@ type Book = {
   description?: string;
   coverImage?: string;
   author?: string;
-  createdBy: string;
-  chapters: string[];
-  status: 'published' | 'draft';
-  createdAt: string;
-  updatedAt: string;
+  createdBy?: string;
+  chapters?: string[];
+  status?: 'published' | 'draft';
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export default Book;

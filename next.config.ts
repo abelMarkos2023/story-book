@@ -1,6 +1,11 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', // Allow up to 10MB for Server Actions
+    },
+  },
   images: {
     remotePatterns: [
       {
@@ -10,11 +15,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**', // Allow any HTTPS URL
+        hostname: '**',
       },
       {
         protocol: 'http',
-        hostname: '**', // Optional: allow HTTP (less secure)
+        hostname: '**',
       },
     ],
   },
