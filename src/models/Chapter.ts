@@ -1,4 +1,4 @@
-import mongoose, { Schema, models } from 'mongoose';
+import mongoose, {  InferSchemaType, Schema, models } from 'mongoose';
 
 const ChapterSchema = new Schema({
   title: {
@@ -21,6 +21,9 @@ const ChapterSchema = new Schema({
     required: true,
   },
 }, { timestamps: true });
+
+// 👇 Automatically infers the type from the schema
+export type ChapterType = InferSchemaType<typeof ChapterSchema>;
 
 const Chapter = models.Chapter || mongoose.model('Chapter', ChapterSchema);
 

@@ -52,9 +52,11 @@ import mongoose from 'mongoose';
 // Ensure MONGODB_URI is defined
 const MONGODB_URI = process.env.MONGODB_URI;
 
+
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
+
 
 // Define a type-safe cache interface
 interface MongooseCache {
@@ -85,6 +87,8 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
 
   try {
     cached.conn = await cached.promise;
+    console.log('MongoDB URI before return', MONGODB_URI);
+
     return cached.conn;
   } catch (error: unknown) {
     cached.promise = null;

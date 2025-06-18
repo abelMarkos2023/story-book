@@ -92,7 +92,7 @@ export default function Chapters() {
     const fetchChapters = async () => {
       const res = await fetch('/api/chapters/all-chapters');
       const data = await res.json();
-      setChapters(data);
+      setChapters(data.chapters);
     };
 
     fetchChapters();
