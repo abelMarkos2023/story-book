@@ -1,4 +1,7 @@
 import mongoose, {  InferSchemaType, Schema, models } from 'mongoose';
+import Book from './Book';
+
+console.log(Book)
 
 const ChapterSchema = new Schema({
   title: {
