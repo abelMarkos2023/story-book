@@ -87,7 +87,6 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
 
   try {
     cached.conn = await cached.promise;
-    console.log('MongoDB URI before return', MONGODB_URI);
 
     return cached.conn;
   } catch (error: unknown) {

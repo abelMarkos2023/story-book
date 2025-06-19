@@ -14,9 +14,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main content */}
-      <div className="flex flex-col flex-1 bg-gray-950 text-white transition-all duration-300">
+      <div className="flex flex-col flex-1 ml-0 lg:ml-64 bg-gray-950 text-white transition-all duration-300">
         {/* Top bar */}
-        <header className="flex items-center justify-between bg-gray-900 p-4 border-b border-gray-800 md:hidden">
+        <header className="flex items-center justify-between bg-gray-900 p-4 border-b border-gray-800 lg:hidden">
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-white hover:text-yellow-400"
