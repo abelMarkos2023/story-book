@@ -114,13 +114,13 @@ export default function ChaptersPage() {
   }, []);
 
   return (
-    <section className="sm:p-6 p-2 max-w-7xl sm:mx-auto">
+    <section className="sm:p-6 p-1 max-w-7xl mx-0 sm:mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-200">Chapters</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-200">Chapters</h1>
         <a href="/dashboard/chapters/new" className="btn-primary">Add Chapter</a>
       </div>
 
-      {loading ? (
+      {loading || !chapters ? (
    <div className="w-full flex items-center justify-center h-20">
       <div className="animate-spin inline-block w-20 h-20 border-[8px] border-current border-t-transparent text-indigo-500 rounded-full" role="status" aria-label="loading"></div>
    </div>
@@ -160,7 +160,7 @@ export default function ChaptersPage() {
       setCurrentPage(prev);
       fetchChapters(prev);
     }}
-    className={`px-4 py-2 rounded-lg border border-gray-600 text-gray-200 hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
+    className={`px-1 sm:px-4 py-2 rounded-lg border border-gray-600 text-gray-200 hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
     disabled={currentPage === 1}
   >
     Previous
@@ -176,7 +176,7 @@ export default function ChaptersPage() {
       setCurrentPage(next);
       fetchChapters(next);
     }}
-    className={`px-4 py-2 rounded-lg border border-gray-600 text-gray-200 hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
+    className={`px-1 sm:px-4 py-2 rounded-lg border border-gray-600 text-gray-200 hover:bg-gray-700 transition disabled:opacity-50 disabled:cursor-not-allowed`}
     disabled={currentPage === totalPages}
   >
     Next
