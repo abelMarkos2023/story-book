@@ -98,7 +98,7 @@ export default function UsersPage() {
         <tr key={user._id} className="border-t border-gray-700 hover:bg-gray-700">
           <td className="p-3 text-gray-200">{user.name}</td>
           <td className="p-3 text-gray-400 text-sm">{user.email}</td>
-          <td className="p-3 text-gray-400 text-center">{user.role}</td>
+          <td className="p-3 text-gray-400  md:text-left">{user.role}</td>
           <td className="p-3 flex gap-2">
             {/* Buttons here */}
              <div className="flex gap-2">
