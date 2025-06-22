@@ -5,43 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Comment from '@/types/Comment';
-
-function stringToHslColor(str: string, saturation: number, lightness: number) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const h = hash % 360;
-  return `hsl(${h}, ${saturation}%, ${lightness}%)`;
-}
-
-// export function timeAgo(dateString: string) {
-//   const date = new Date(dateString);
-//   const now = new Date();
-//   const diff = (now.getTime() - date.getTime()) / 1000; // seconds
-
-//   const intervals: [number, Intl.RelativeTimeFormatUnit][] = [
-//     [60, 'seconds'],
-//     [60, 'minutes'],
-//     [24, 'hours'],
-//     [7, 'days'],
-//     [4.34524, 'weeks'],
-//     [12, 'months'],
-//     [Number.POSITIVE_INFINITY, 'years'],
-//   ];
-
-//   let duration = diff;
-//   let unit: Intl.RelativeTimeFormatUnit = 'seconds';
-
-//   for (let i = 0; i < intervals.length; i++) {
-//     if (duration < intervals[i][0]) break;
-//     duration /= intervals[i][0];
-//     unit = intervals[i][1];
-//   }
-
-//   const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-//   return rtf.format(-Math.floor(duration), unit);
-// }
+import { stringToHslColor } from '@/lib/utils';
 
 
 export function timeAgo(dateString: string): string {
@@ -138,21 +102,21 @@ export default function CommentSection({ chapterId }: { chapterId: string }) {
   const hasMore = comments.length < total;
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 max-w-full">
       <h2 className="text-xl font-bold mb-4 text-gray-300">💬 Comments</h2>
 
       {session ? (
-        <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
+        <form onSubmit={handleSubmit} className="flex max-w-full gap-1 sm:gap-2 mb-6">
           <input
             type="text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write a comment..."
-            className="flex-1 px-4 py-2 rounded bg-gray-800 text-white focus:ring-2 ring-yellow-400"
+            className="sm:flex-1 px-1 sm:px-4 py-2 rounded bg-gray-800 text-white focus:ring-2 ring-yellow-400"
           />
           <button
             type="submit"
-            className="px-4 py-2 rounded bg-yellow-500 text-black font-semibold hover:bg-yellow-600"
+            className="px-1 sm:px-4 py-2 rounded bg-yellow-500 text-black font-semibold hover:bg-yellow-600"
           >
              {submitting ? (
           <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
@@ -192,7 +156,7 @@ export default function CommentSection({ chapterId }: { chapterId: string }) {
       {hasMore && (
         <button
           onClick={handleLoadMore}
-          className="mt-6 w-full py-2 rounded bg-gray-700 text-gray-300 hover:bg-gray-600 transition"
+          className="mt-6 w-full cursor-pointer py-2 rounded bg-gray-700 text-gray-300 hover:bg-gray-600 transition"
         >
           Load More Comments
         </button>

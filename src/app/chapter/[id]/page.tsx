@@ -104,7 +104,7 @@ useEffect(() => {
             <div dangerouslySetInnerHTML={{ __html: chapter.content }} />
           </article>
 
-          <div className="mt-10">
+          <div className="mt-10 max-w-full">
             <CommentSection chapterId={chapter._id} />
           </div>
         </motion.div>

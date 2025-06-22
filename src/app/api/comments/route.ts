@@ -20,19 +20,7 @@ export async function POST(req: Request) {
   return NextResponse.json(newComment);
 }
 
-// export async function GET(req: Request) {
-//   await connectToDatabase();
-//   const { searchParams } = new URL(req.url);
-//   const chapterId = searchParams.get('chapter');
 
-//   if (!chapterId) return NextResponse.json({ error: 'Missing chapterId' }, { status: 400 });
-
-//   const comments = await Comment.find({ chapter: chapterId })
-//     .populate('user', 'name image')
-//     .sort({ createdAt: -1 });
-
-//   return NextResponse.json(comments);
-// }
 
 export async function GET(req: Request) {
   await connectToDatabase();
